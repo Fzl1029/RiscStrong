@@ -18,17 +18,19 @@
 
 //`timescale <time_units> / <precision>
 
-module program_counter( in1,clk,out1);
+module program_counter( reset1,in1,clk,pc);
 input[31:0] in1;
-input clk;
-output[31:0] out1;
+input reset1,clk;
+output[31:0] pc;
 
 reg[31:0] pc;
 
 always @(posedge clk) begin
+if(reset1)
+pc<=8'h0;
+else
 pc<=in1;
 end
-assign out1=pc;
 //<statements>
 
 endmodule
