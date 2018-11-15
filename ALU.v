@@ -18,9 +18,9 @@
 
 //`timescale <time_units> / <precision>
 
-module myALU( in1, in2,sel, outdata, zero);
+module myALU( in1, in2,funsel, outdata, zero);
 input[31:0] in1, in2;
-input[3:0] sel;
+input[3:0] funsel;
 output[31:0] outdata;
 output[2:0] zero;
 
@@ -28,7 +28,7 @@ reg[2:0] zero;
 reg[31:0] outdata;
 
 always @(*) begin
-case(sel)
+case(funsel)
     4'b0000:outdata<=($signed(in1)&$signed(in2));//and
     4'b0001:outdata<=($signed(in1)|$signed(in2));//or
     4'b0010:outdata<=($signed(in1)+$signed(in2));//add

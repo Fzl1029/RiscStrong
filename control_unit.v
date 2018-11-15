@@ -18,18 +18,18 @@
 
 //`timescale <time_units> / <precision>
 
-module control_unit( in1, out1);
-input[6:0] in1;
+module control_unit( opcode, outctr);
+input[6:0] opcode;
 
-output[7:0]out1 ;
-reg[7:0] out1;//dmemread,dmemtoreg,aluop[1:0],dmemwrite,alusrc,regwrite,im
+output[7:0]outctr ;
+reg[7:0] outctr;//dmemread,dmemtoreg,aluop[1:0],dmemwrite,alusrc,regwrite,im
 
 always @(*) begin
-    case(in1[6:2])
-    5'b11000:out1<=8'b00010000; //branch instruction
-    5'b00100:out1<=8'b00100111; //immediate arithm
-    5'b01100:out1<=8'b00100010; //reg arithm
-    default:out1<=8'b0;
+    case(opcode[6:2])
+    5'b11000:outctr<=8'b00010000; //branch instruction
+    5'b00100:outctr<=8'b00100111; //immediate arithm
+    5'b01100:outctr<=8'b00100010; //reg arithm
+    default:outctr<=8'b0;
     endcase
 end
 //<statements>

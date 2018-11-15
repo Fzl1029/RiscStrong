@@ -18,10 +18,10 @@
 
 //`timescale <time_units> / <precision>
 
-module reg_file( write_addr,read1,read2,clk,in1,write_reg,out1,out2);
+module reg_file( write_addr,read1,read2,clk,write_data,write_ctr,out1,out2);
 input[4:0] read1,read2,write_addr;
-input[31:0] in1;
-input clk,write_reg;
+input[31:0] write_data;
+input clk,write_ctr;
 output[31:0] out1,out2;
 
 
@@ -34,8 +34,8 @@ RF[3]=8'h1;
 end
 
 
-always begin@(negedge clk) if(write_reg&(write_addr>0))
-RF[write_addr]<=in1;
+always begin@(negedge clk) if(write_ctr&(write_addr>0))
+RF[write_addr]<=write_data;
 //<statements>
 end
 
