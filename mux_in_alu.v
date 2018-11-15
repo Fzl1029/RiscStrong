@@ -18,16 +18,16 @@
 
 //`timescale <time_units> / <precision>
 
-module mux_in_alu( in1, in2, ctr, out1);
-input[31:0] in1, in2;
-input ctr;
-output[31:0]out1;
-reg[31:0] out1;
+module mux_3_in( in0, in1, sel, outdata);
+input[31:0] in0, in1;
+input sel;
+output[31:0]outdata;
+reg[31:0] outdata;
 
 always @(*)begin
-case(ctr)
-    1'b0:out1<=in1;
-    1'b1:out1<=in2;
+case(sel)
+    1'b0:outdata<=in0;
+    1'b1:outdata<=in1;
 endcase
 end
 endmodule

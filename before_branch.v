@@ -18,24 +18,24 @@
 
 //`timescale <time_units> / <precision>
 
-module before_branch( in1, ctr1,ctr2, out1 );
-input[2:0] in1;
-input ctr1;
-input[1:0] ctr2;
-output out1;
-reg out1;
+module before_branch( aluzero, itype,branchtype, outctr );
+input[2:0] aluzero;
+input itype;
+input[1:0] branchtype;
+output  outctr;
+reg  outctr;
 
 always @(*) begin
-if (ctr1)
+if (itype)
  begin
- case(ctr2)
-    2'b00:out1<=in1[1];
-    2'b01:out1<=(in1[2]|in1[0]);
-    2'b10:out1<=in1[2];
-    2'b11:out1<=(in1[1]|in1[0]);
+ case(branchtype)
+    2'b00: outctr<=aluzero[1];
+    2'b01: outctr<=(aluzero[2]|aluzero[0]);
+    2'b10: outctr<=aluzero[2];
+    2'b11: outctr<=(aluzero[1]|aluzero[0]);
  endcase
  end
-else out1<=1'b0;
+else  outctr<=1'b0;
 end
 //<statements>
 

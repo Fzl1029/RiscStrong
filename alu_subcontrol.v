@@ -18,16 +18,16 @@
 
 //`timescale <time_units> / <precision>
 
-module alu_subcontrol(aluop,in1,outsel);
+module alu_subcontrol(aluop,instin,outsel);
 input[1:0] aluop;
-input[31:0] in1;
+input[31:0] instin;
 output[3:0] outsel;
 reg[3:0]outsel;
 
 always @(*) begin
-    if (aluop==2'b01)
+    if (aluop==2'b10)
         begin
-        case({in1[30],in1[14:12]})
+        case({instin[30],instin[14:12]})
         4'b0000:outsel<=4'b0010;//ADD
         4'b0001:outsel<=4'b1001;//SLL
         4'b0010:outsel<=4'b0111;//SLT
@@ -40,9 +40,9 @@ always @(*) begin
         default:outsel<=4'b1111;
         endcase
         end
-    else if (aluop==2'b10)
+    else if (aluop==2'b01)
         begin
-        case(in1[13])
+        case(instin[13])
         1'b0:outsel<=4'b0111;//signed
         1'b1:outsel<=4'b1000;//unsigned
         //3'b000:outsel<=4'b0111;//BEQ s
