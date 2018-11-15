@@ -35,7 +35,7 @@ program_counter  my_pc(.reset1(rst),.in1(pcin),.pc(pcout),.clk(clk));
 myALU            my_ALU(.in1(regout1), .in2(aluin2),.sel(alu_ctr), .outdata(alu_out), .zero(alu_zero));
 adder_addr       before_pc_add(.in1(32'b100),.in2(pcout),.out1(pcadd));
 mux_in_alu       atalu( .in1(regout2), .in2(igen), .ctr(mctrl[2]), .out1(aluin2));
-mux_in_alu       afterdmem( .in1(alu_out), .in2(fr_dmem), .ctr(mctrl[7]), .out1(reg_in_data));
+mux_4            afterdmem( .datain0(alu_out), .datain1(fr_dmem), .datain2(igen), .datain3(pcin), .ctr(mctrl[7:6]), .out1(reg_in_data));
 mux_in_alu       before_pc_mux(.in1(pcadd),.in2(branch_add_out),.ctr(branch_ctrl),.out1(pcin));
 
 im_gen_subctr    my_im_ctr( .in1(fr_imem),.ctr(mctrl[5:4]),.out1(im_ctr) );

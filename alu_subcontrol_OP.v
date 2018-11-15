@@ -53,6 +53,12 @@ always @(*) begin
         //3'b111:outsel<=4'b1000;//BGEU
         endcase
         end
+    //appended by OPERATOR
+    else if (aluop==2'b11)
+    begin
+        outsel<=4'b1101;
+    end
+    //END
     else
     outsel<=4'b1111;
 end

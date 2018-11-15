@@ -41,6 +41,7 @@ case(sel)
     4'b1100:outdata<=in1^in2;//xor
     //appended by OPERATOR
     4'b1101:zero<=3'b111;//for auipc
+    //END
     default:outdata<=32'h00000000;
 endcase
 end
