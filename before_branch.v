@@ -20,13 +20,13 @@
 
 module before_branch( aluzero, itype,branchtype, outctr );
 input[2:0] aluzero;
-input itype;
+input[1:0] itype;
 input[1:0] branchtype;
 output  outctr;
 reg  outctr;
 
 always @(*) begin
-if (itype)
+if (itype==2'b10)| (itype==2'b11)
  begin
  case(branchtype)
     2'b00: outctr<=aluzero[1];

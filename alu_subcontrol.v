@@ -53,8 +53,10 @@ always @(*) begin
         //3'b111:outsel<=4'b1000;//BGEU
         endcase
         end
+    else if(aluop==2'b00)
+        outsel<=4'b0010;//ADD<-Load&store address
     else
-    outsel<=4'b1111;
+    outsel<=4'b1101;
 end
 //<statements>
 

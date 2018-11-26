@@ -26,6 +26,7 @@ output[2:0] zero;
 
 reg[2:0] zero;
 reg[31:0] outdata;
+reg[31:0] buffer;
 
 always @(*) begin
 case(funsel)
@@ -39,6 +40,12 @@ case(funsel)
     4'b1010:outdata<=(in1 <<< in2[4:0]);//als
     4'b1011:outdata<=(in1 >>> in2[4:0]);//ars
     4'b1100:outdata<=in1^in2;//xor
+    //
+    4'b1101:begin zero<=3'b111;//for auipc
+            buffer<=($signed(in1)+$signed(in2));
+            outdata<={buffer[31:1],1'b1};
+        end
+
     default:outdata<=32'h00000000;
 endcase
 end

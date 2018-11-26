@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Company: <Name>
 //
-// File: im_gen_subctr.v
+// File: dmem_collector.v
 // File history:
 //      <Revision number>: <Date>: <Comments>
 //      <Revision number>: <Date>: <Comments>
@@ -18,20 +18,12 @@
 
 //`timescale <time_units> / <precision>
 
-module im_gen_subctr( in1,ctr,out1 );
-input[31:0] in1;
-input[1:0] ctr;
-output[2:0] out1;
-reg[2:0] out1;
+module dmem_collector( in1,in2,in3,in4,outdata );
+input[7:0] in1,in2,in3,in4;
+output[31:0] outdata;
 
-always@(*) begin
-case(ctr)
- 2'b10:out1<=3'b000;  //this is just for arithmetic I type immediate
- 2'b01:out1<=3'b010;  //this is just for branch B type immediate
- //appended by OPERATOR
- 2'b11:out1<=3'b011; //this is just for U type immediate
+assign outdata={in4,in3,in2,in1};
 //<statements>
-endcase
-end
+
 endmodule
 

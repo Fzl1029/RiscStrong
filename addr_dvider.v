@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Company: <Name>
 //
-// File: control_unit.v
+// File: addr_dvider.v
 // File history:
 //      <Revision number>: <Date>: <Comments>
 //      <Revision number>: <Date>: <Comments>
@@ -18,23 +18,14 @@
 
 //`timescale <time_units> / <precision>
 
-module control_unit( in1, out1);
-input[6:0] in1;
+module addr_dvider( full_addr, addr_12);
+input[31:0] full_addr;
+output[11:0] addr_12;
 
-output[7:0]out1 ;
-reg[7:0] out1;//dmemread,dmemtoreg,aluop[1:0],dmemwrite,alusrc,regwrite,im
 
-always @(*) begin
-    case(in1[6:2])
-    5'b11000:out1<=8'b00010000; //branch instruction
-    5'b00100:out1<=8'b00100111; //immediate arithm
-    5'b01100:out1<=8'b00100010; //reg arithm
-    //appended by OPERATOR
-    5'b01101:out1<=8'b01110110;//load upper immediate(LUI)instruction
-    5'b00101:out1<=8'b11110110;//add upper immediate to pc(AUIPC)instruction
-    default:out1<=8'b0;
-    endcase
-end
+
+assign addr_12=full_addr[13:2];
+
 //<statements>
 
 endmodule
